@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<div th:replace="fragments/header :: header"></div>
+<body>
+<div id="container" class="container">
+    <h1>Add star</h1>
+    <div th:replace="fragments/adduser::adduser"></div>
+    <div th:replace="fragments/edituser::edituser"></div>
+    <form id="createForm" action="/save" method="post" class="form-horizontal">
+            <div class="form-group">
+                <label for="name" class="col-sm-2 control-label">Name</label>
+                <div class="col-xs-2">
+                    <input id="name" class="form-control" required=""></input>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="coordX" class="col-sm-2 control-label">Coordinates X</label>
+                <div class="col-xs-2">
+                    <input id="coordX" class="form-control" type="number" step="any" required=""></input>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="coordY" class="col-sm-2 control-label">Coordinates Y</label>
+                <div class="col-xs-2">
+                    <input id="coordY" class="form-control" type="number" step="any" required=""></input>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="dict" class="col-sm-2 control-label">Dictionary</label>
+                <div class="col-xs-2">
+                    <select id="dict" class="form-control"></select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="users" class="col-sm-2 control-label">User</label>
+                <div class="col-xs-2">
+                    <select id="users" class="form-control"></select>
+                </div>
+                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#userModal">
+                    <i class="fa fa-plus" aria-hidden="true"></i>
+                </button>
+                <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#editUserModal">
+                    <i class="fa fa-pencil" aria-hidden="true"></i>
+                </button>
+            </div>
+            <div class="form-group">
+                <div class="offset-sm-2 col-sm-10">
+                    <button type="submit" class="btn btn-primary">Create</button>
+                </div>
+            </div>
+    </form>
+</div>
+<div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>

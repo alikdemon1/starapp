@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"></meta>
+    <title>Title</title>
+    <link rel="stylesheet" href="css/index.css"></link>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="wrapper">
+    <form class="form-signin" id="loginForm">
+        <div style="visibility: hidden" id="errors" class="alert alert-danger">
+        </div>
+        <h2 class="form-signin-heading">Please login</h2>
+        <input type="text" class="form-control" name="username" id="email" placeholder="Email Address" required=""
+               autofocus=""/>
+        <input type="password" class="form-control" name="password" id="password" placeholder="Password" required=""/>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
+    </form>
+</div>
+<script>
+    $('#loginForm').submit(function (event) {
+        var password = $('#password').val();
+        var email = $('#email').val();
+        var json = {"email": email, "password": password};
+
+        console.log(json);
+
+        $.ajax({
+            url: "/login",
+            data: JSON.stringify(json),
+            type: "POST",
+            dataType: 'text',
+
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader("Accept", "application/json");
+                xhr.setRequestHeader("Content-Type", "application/json");
+            },
+            success: function (data) {
+                $('#loginForm')[0].reset();
+                $(location).attr('href', '/main')
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                $('#errors').append(jqXHR.responseText);
+                $('#errors').css("visibility", "visible");
+            }
+        });
+
+        event.preventDefault();
+    });
+</script>
+</body>
+</html>
